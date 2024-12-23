@@ -44,7 +44,16 @@ namespace ColorHelper
             
             return ConvertRgbToNecessaryColorType<T>(rgb);
         }
+        private static T GetRandomColor<T>(RgbRandomColorFilter filter,int seed) where T : IColor
+        {
+            Random random = new Random(seed);
 
+            RGB rgb = new RGB(
+                (byte)random.Next(filter.minR, filter.maxR),
+                (byte)random.Next(filter.minG, filter.maxG),
+                (byte)random.Next(filter.minB, filter.maxB));
+            return ConvertRgbToNecessaryColorType<T>(rgb);
+        }
         private static T ConvertRgbToNecessaryColorType<T>(RGB rgb) where T: IColor
         {
             if (typeof(T) == typeof(RGB))
